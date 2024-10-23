@@ -12,17 +12,20 @@ let amountErrors = 0;
 for (i = 0; i < paragraphString.length; i++) {
     spannedTypingElement += "<span>" + paragraphString[i] + "</span>";
 }
-typingElement.innerHtml = spannedTypingElement;
 
-document.querySelector(`span:nth-child(${stringIterator})`).classList.add("selected");
+document.getElementById("typingElement").innerHTML = spannedTypingElement;
+
+const targetElement = document.querySelectorAll("span");
 
 window.addEventListener("keydown", (event) => {
     userKeyInput = event.key;
+    targetElement[stringIterator].classList.add("selected");
     console.log(userKeyInput);
     if (userKeyInput == (paragraphString[stringIterator])) {
         amountCorrect += 1;
         amountCorrectHeader.innerHTML = "Correct: " + amountCorrect;
         stringIterator += 1;
+
     }
     else{
         amountErrors += 1;
