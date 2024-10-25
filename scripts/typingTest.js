@@ -12,27 +12,38 @@ let amountErrors = 0;
 for (i = 0; i < paragraphString.length; i++) {
     spannedTypingElement += "<span>" + paragraphString[i] + "</span>";
 }
-
 document.getElementById("typingElement").innerHTML = spannedTypingElement;
 
 const targetElement = document.querySelectorAll("span");
+targetElement[stringIterator].classList.add("selected");
 
-window.addEventListener("keydown", (event) => {
-    userKeyInput = event.key;
-    targetElement[stringIterator].classList.add("selected");
-    console.log(userKeyInput);
+window.addEventListener("keydown", (e) => {
+    restartButton.blur();
+    userKeyInput = e.key;
+    if (paragraphString[stringIterator] == undefined) {
+        restart();
+    }
     if (userKeyInput == (paragraphString[stringIterator])) {
         amountCorrect += 1;
-        amountCorrectHeader.innerHTML = "Correct: " + amountCorrect;
+        amountCorrectHeader.innerHTML = amountCorrect;
         stringIterator += 1;
-
     }
     else{
         amountErrors += 1;
-        amountErrorsHeader.innerHTML = "Errors: " + amountErrors;
+        amountErrorsHeader.innerHTML = amountErrors;
     }
+    for (i = 0; i < targetElement.length; i++) {
+        targetElement[i].classList.remove("selected");
+    }
+    targetElement[stringIterator].classList.add("selected");
 })
 
-restartButton.addEventListener("click", () => {
+restartButton.addEventListener("click", restart);
+
+function restart() {
     stringIterator = 0;
-})
+    amountCorrect = 0;
+    amountErrors = 0;
+    amountCorrectHeader.innerHTML = amountCorrect;
+    amountErrorsHeader.innerHTML = amountErrors;
+}
