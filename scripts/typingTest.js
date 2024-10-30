@@ -18,7 +18,7 @@ const targetElement = document.querySelectorAll("span");
 targetElement[stringIterator].classList.add("selected");
 
 window.addEventListener("keydown", (e) => {
-    restartButton.blur();
+    
     userKeyInput = e.key;
     if (paragraphString[stringIterator] == undefined) {
         restart();
@@ -41,9 +41,9 @@ window.addEventListener("keydown", (e) => {
 restartButton.addEventListener("click", restart);
 
 function restart() {
+    restartButton.blur();
     stringIterator = 0;
     amountCorrect = 0;
     amountErrors = 0;
     amountCorrectHeader.innerHTML = amountCorrect;
     amountErrorsHeader.innerHTML = amountErrors;
-}
